@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import { toast } from 'sonner';
 
@@ -15,28 +14,7 @@ const Index = () => {
     }, 3000);
   };
 
-  const features = [
-    {
-      icon: 'Sparkles',
-      title: 'AI-генерация',
-      description: 'Нейросеть создает уникальную музыку на основе ваших параметров',
-    },
-    {
-      icon: 'Wand2',
-      title: 'Любой стиль',
-      description: 'От электроники до классики — выбирайте из десятков жанров',
-    },
-    {
-      icon: 'Download',
-      title: 'Скачивание',
-      description: 'Получите треки в высоком качестве WAV и MP3',
-    },
-    {
-      icon: 'Repeat',
-      title: 'Без лимитов',
-      description: 'Генерируйте столько музыки, сколько нужно',
-    },
-  ];
+
 
 
 
@@ -58,41 +36,15 @@ const Index = () => {
           </Button>
         </nav>
 
-        <section className="container mx-auto px-4 py-20 text-center">
+        <section className="container mx-auto px-4 py-32 text-center">
           <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
             <h1 className="text-6xl md:text-7xl font-heading font-bold leading-tight">
               Создавайте музыку{' '}
               <span className="text-gradient">силой AI</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Опишите настроение, выберите стиль — и нейросеть сгенерирует уникальный трек за секунды
+              Нейросеть генерирует уникальные треки, биты и мелодии за секунды. AI композитор для музыкантов, продюсеров и создателей контента
             </p>
-            <div className="flex gap-4 justify-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 glow-purple text-lg px-8">
-                <Icon name="Play" size={20} className="mr-2" />
-                Начать создавать
-              </Button>
-              <Button size="lg" variant="outline" className="border-secondary/50 hover:bg-secondary/10 text-lg px-8">
-                <Icon name="Headphones" size={20} className="mr-2" />
-                Послушать примеры
-              </Button>
-            </div>
-          </div>
-
-          <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {features.map((feature, index) => (
-              <Card
-                key={index}
-                className="p-6 bg-card border-primary/20 hover:border-primary/50 transition-all duration-300 hover:scale-105 group"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-4 group-hover:glow-purple transition-all">
-                  <Icon name={feature.icon} size={24} className="text-white" />
-                </div>
-                <h3 className="font-heading font-semibold text-lg mb-2">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground">{feature.description}</p>
-              </Card>
-            ))}
           </div>
         </section>
 
