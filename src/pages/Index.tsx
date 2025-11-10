@@ -1,41 +1,19 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Slider } from '@/components/ui/slider';
 import Icon from '@/components/ui/icon';
 import { toast } from 'sonner';
 
 const Index = () => {
-  const [prompt, setPrompt] = useState('');
-  const [genre, setGenre] = useState('');
-  const [mood, setMood] = useState('');
-  const [duration, setDuration] = useState([30]);
   const [isGenerating, setIsGenerating] = useState(false);
 
   const handleGenerate = async () => {
-    if (!prompt || !genre || !mood) {
-      toast.error('Пожалуйста, заполните все поля');
-      return;
-    }
-
     setIsGenerating(true);
     setTimeout(() => {
       setIsGenerating(false);
       toast.success('Музыка успешно сгенерирована! 🎵');
     }, 3000);
   };
-
-  const genres = [
-    { value: 'electronic', label: 'Electronic', icon: 'Zap' },
-    { value: 'ambient', label: 'Ambient', icon: 'Cloud' },
-    { value: 'rock', label: 'Rock', icon: 'Guitar' },
-    { value: 'jazz', label: 'Jazz', icon: 'Music' },
-    { value: 'classical', label: 'Classical', icon: 'Piano' },
-    { value: 'hiphop', label: 'Hip-Hop', icon: 'Disc3' },
-  ];
 
   const features = [
     {
@@ -60,26 +38,7 @@ const Index = () => {
     },
   ];
 
-  const examples = [
-    {
-      title: 'Cosmic Dreams',
-      genre: 'Ambient Electronic',
-      duration: '3:24',
-      waveform: '▁▂▃▅▇▆▄▃▂▁▂▃▅▇',
-    },
-    {
-      title: 'Night Drive',
-      genre: 'Synthwave',
-      duration: '2:48',
-      waveform: '▃▅▇▆▄▂▁▂▄▆▇▅▃',
-    },
-    {
-      title: 'Digital Rain',
-      genre: 'Lo-fi Hip-Hop',
-      duration: '4:12',
-      waveform: '▂▃▄▅▆▇▆▅▄▃▂▁▂',
-    },
-  ];
+
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
@@ -137,150 +96,26 @@ const Index = () => {
           </div>
         </section>
 
-        <section className="container mx-auto px-4 py-20">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-heading font-bold text-center mb-12">
-              Генератор музыки
-            </h2>
-            
-            <Card className="p-8 bg-card border-primary/20 backdrop-blur-sm">
-              <div className="space-y-6">
-                <div>
-                  <Label htmlFor="prompt" className="text-base mb-2 block">
-                    Опишите желаемую музыку
-                  </Label>
-                  <Input
-                    id="prompt"
-                    placeholder="Например: энергичный электронный трек для тренировки"
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    className="bg-background border-primary/30 focus:border-primary"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <Label htmlFor="genre" className="text-base mb-2 block">
-                      Жанр
-                    </Label>
-                    <Select value={genre} onValueChange={setGenre}>
-                      <SelectTrigger id="genre" className="bg-background border-primary/30">
-                        <SelectValue placeholder="Выберите жанр" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {genres.map((g) => (
-                          <SelectItem key={g.value} value={g.value}>
-                            <div className="flex items-center gap-2">
-                              <Icon name={g.icon} size={16} />
-                              {g.label}
-                            </div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="mood" className="text-base mb-2 block">
-                      Настроение
-                    </Label>
-                    <Select value={mood} onValueChange={setMood}>
-                      <SelectTrigger id="mood" className="bg-background border-primary/30">
-                        <SelectValue placeholder="Выберите настроение" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="energetic">⚡ Энергичное</SelectItem>
-                        <SelectItem value="calm">🌙 Спокойное</SelectItem>
-                        <SelectItem value="uplifting">✨ Вдохновляющее</SelectItem>
-                        <SelectItem value="dark">🌑 Темное</SelectItem>
-                        <SelectItem value="happy">😊 Радостное</SelectItem>
-                        <SelectItem value="melancholic">💙 Меланхоличное</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="duration" className="text-base mb-2 block">
-                    Длительность: {duration[0]} секунд
-                  </Label>
-                  <Slider
-                    id="duration"
-                    min={15}
-                    max={180}
-                    step={15}
-                    value={duration}
-                    onValueChange={setDuration}
-                    className="py-4"
-                  />
-                </div>
-
-                <Button
-                  onClick={handleGenerate}
-                  disabled={isGenerating}
-                  className="w-full bg-gradient-to-r from-primary via-secondary to-accent hover:opacity-90 text-white font-semibold text-lg py-6 glow-purple"
-                >
-                  {isGenerating ? (
-                    <>
-                      <Icon name="Loader2" size={20} className="mr-2 animate-spin" />
-                      Генерирую музыку...
-                    </>
-                  ) : (
-                    <>
-                      <Icon name="Sparkles" size={20} className="mr-2" />
-                      Создать музыку
-                    </>
-                  )}
-                </Button>
-              </div>
-            </Card>
-          </div>
-        </section>
-
-        <section className="container mx-auto px-4 py-20">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-heading font-bold text-center mb-4">
-              Примеры треков
-            </h2>
-            <p className="text-muted-foreground text-center mb-12">
-              Послушайте, что создали другие пользователи
-            </p>
-
-            <div className="space-y-4">
-              {examples.map((example, index) => (
-                <Card
-                  key={index}
-                  className="p-6 bg-card border-primary/20 hover:border-primary/50 transition-all duration-300 hover:scale-[1.02]"
-                >
-                  <div className="flex items-center gap-6">
-                    <Button
-                      size="icon"
-                      className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary hover:opacity-90 flex-shrink-0 glow-purple"
-                    >
-                      <Icon name="Play" size={24} className="text-white" />
-                    </Button>
-                    
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-heading font-semibold text-lg mb-1">{example.title}</h3>
-                      <p className="text-sm text-muted-foreground">{example.genre} • {example.duration}</p>
-                    </div>
-
-                    <div className="hidden md:flex items-center gap-2 text-primary font-mono text-2xl">
-                      {example.waveform}
-                    </div>
-
-                    <div className="flex gap-2">
-                      <Button size="icon" variant="outline" className="border-primary/30">
-                        <Icon name="Heart" size={18} />
-                      </Button>
-                      <Button size="icon" variant="outline" className="border-primary/30">
-                        <Icon name="Download" size={18} />
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
+        <section className="container mx-auto px-4 py-32">
+          <div className="flex justify-center">
+            <Button
+              onClick={handleGenerate}
+              disabled={isGenerating}
+              size="lg"
+              className="bg-gradient-to-r from-primary via-secondary to-accent hover:opacity-90 text-white font-bold text-2xl py-12 px-16 glow-purple rounded-2xl transition-all hover:scale-105"
+            >
+              {isGenerating ? (
+                <>
+                  <Icon name="Loader2" size={32} className="mr-3 animate-spin" />
+                  Генерирую...
+                </>
+              ) : (
+                <>
+                  <Icon name="Sparkles" size={32} className="mr-3" />
+                  Генерация треков
+                </>
+              )}
+            </Button>
           </div>
         </section>
 
