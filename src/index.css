@@ -92,4 +92,22 @@
       rgba(217, 70, 239, 0.1) 100%
     );
   }
+
+  .pulse-button {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes wave {
+    0%,
+    100% {
+      transform: translateY(0) scaleY(1);
+    }
+    50% {
+      transform: translateY(-10px) scaleY(1.1);
+    }
+  }
+
+  .wave-bar {
+    animation: wave 1.5s ease-in-out infinite;
+  }
 }

@@ -19,8 +19,23 @@ const Index = () => {
 
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 pointer-events-none" />
+      
+      <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+        <div className="flex gap-2 items-end h-32">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="wave-bar w-2 bg-gradient-to-t from-primary via-secondary to-accent rounded-full"
+              style={{
+                height: `${Math.random() * 60 + 40}%`,
+                animationDelay: `${i * 0.1}s`,
+              }}
+            />
+          ))}
+        </div>
+      </div>
       
       <div className="relative z-10">
         <nav className="container mx-auto px-4 py-6 flex justify-between items-center">
@@ -54,7 +69,7 @@ const Index = () => {
               onClick={handleGenerate}
               disabled={isGenerating}
               size="lg"
-              className="bg-gradient-to-r from-primary via-secondary to-accent hover:opacity-90 text-white font-bold text-2xl py-12 px-16 glow-purple rounded-2xl transition-all hover:scale-105"
+              className="bg-gradient-to-r from-primary via-secondary to-accent hover:opacity-90 text-white font-bold text-2xl py-12 px-16 glow-purple pulse-button rounded-2xl transition-all hover:scale-105"
             >
               {isGenerating ? (
                 <>
